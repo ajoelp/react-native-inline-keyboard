@@ -10,12 +10,12 @@ npm install react-native-inline-keyboard
 
 ## Usage
 
-```js
+```jsx
 import InlineKeyboard from "react-native-inline-keyboard";
 
 // ...
 
-const deviceName = await InlineKeyboard.getDeviceName();
+<InlineKeyboard value={value} onChange={(value) => console.log(value)} />
 ```
 
 ## License
