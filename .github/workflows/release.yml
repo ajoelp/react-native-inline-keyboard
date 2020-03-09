@@ -1,6 +1,8 @@
-name: Lint & Test
+name: CI
 
-on: [push]
+on:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -31,3 +33,11 @@ jobs:
 
       - name: Build
         run: yarn prepare
+
+      - name: Version
+        run: npm version ${GITHUB_REF/refs\/tags\//}
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
