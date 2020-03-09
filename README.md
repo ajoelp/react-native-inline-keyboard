@@ -20,6 +20,18 @@ import InlineKeyboard from "react-native-inline-keyboard";
 <InlineKeyboard value={value} onChange={(value) => console.log(value)} />
 ```
 
+### Props
+
+| Prop | Type |
+|------|------|
+|value | `string` |
+|onChange | `function (value: string`)|
+|showInput | `boolean` |
+|letterContainerStyles | `StyleProp<ViewStyle>` |
+|letterButtonStyles | `StyleProp<ViewStyle>` |
+|letterButtonFocusStyles | `StyleProp<ViewStyle>` |
+|letterButtonTextStyles | `StyleProp<TextStyle>` |
+
 ## License
 
 MIT
