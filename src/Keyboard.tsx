@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
 import TVTouchableFeedback from './TVTouchableFeedback';
 import Language from './languages/en';
 
@@ -35,10 +42,25 @@ const styles = StyleSheet.create({
 interface InlineKeyboardProps {
   value: string;
   onChange(text: string): any;
+  showInput?: boolean;
+  letterContainerStyles?: StyleProp<ViewStyle>;
+  letterButtonStyles?: StyleProp<ViewStyle>;
+  letterButtonFocusStyles?: StyleProp<ViewStyle>;
+  letterButtonTextStyles?: StyleProp<TextStyle>;
 }
 
-const InlineKeyboard: React.FC<InlineKeyboardProps> = ({ onChange, value }) => {
+const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
   const [showSymbols, setShowSymbols] = React.useState(false);
+
+  const {
+    onChange,
+    value,
+    showInput = false,
+    letterContainerStyles = styles.letterContainer,
+    letterButtonStyles = styles.letterButton,
+    letterButtonFocusStyles = styles.letterButtonFocus,
+    letterButtonTextStyles = styles.letterText,
+  } = props;
 
   const toggleShowSymbols = () => {
     setShowSymbols(!showSymbols);
@@ -58,74 +80,82 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = ({ onChange, value }) => {
 
   return (
     <View>
-      <View style={styles.input}>
-        <Text style={styles.inputText}>{value || 'Type Something'}</Text>
-      </View>
+      {showInput && (
+        <View style={styles.input}>
+          <Text style={styles.inputText}>{value || 'Type Something'}</Text>
+        </View>
+      )}
       <View>
-        <View style={styles.letterContainer}>
+        <View style={letterContainerStyles}>
           <TVTouchableFeedback
-            style={styles.letterButton}
-            focusStyles={styles.letterButtonFocus}
+            style={letterButtonStyles}
+            focusStyles={letterButtonFocusStyles}
             activeOpacity={1}
             onPress={toggleShowSymbols}
             testID={'symbols-button'}
           >
-            <Text style={styles.letterText}>123</Text>
+            <Text style={letterButtonTextStyles}>123</Text>
           </TVTouchableFeedback>
           {Language.letters.map(letter => {
             return (
               <TVTouchableFeedback
                 testID={`letter-${letter}`}
-                style={styles.letterButton}
-                focusStyles={styles.letterButtonFocus}
+                style={letterButtonStyles}
+                focusStyles={letterButtonFocusStyles}
                 activeOpacity={1}
                 key={letter}
                 onPress={addLetter(letter)}
               >
-                <Text style={styles.letterText}>{letter.toUpperCase()}</Text>
+                <Text style={letterButtonTextStyles}>
+                  {letter.toUpperCase()}
+                </Text>
               </TVTouchableFeedback>
             );
           })}
           <TVTouchableFeedback
             testID={'space-button'}
-            style={styles.letterButton}
-            focusStyles={styles.letterButtonFocus}
+            style={letterButtonStyles}
+            focusStyles={letterButtonFocusStyles}
             activeOpacity={1}
             onPress={addLetter(' ')}
           >
-            <Text style={styles.letterText}>{'space'.toUpperCase()}</Text>
+            <Text style={letterButtonTextStyles}>{'space'.toUpperCase()}</Text>
           </TVTouchableFeedback>
           <TVTouchableFeedback
             testID={'delete-button'}
-            style={styles.letterButton}
-            focusStyles={styles.letterButtonFocus}
+            style={letterButtonStyles}
+            focusStyles={letterButtonFocusStyles}
             activeOpacity={1}
             onPress={backspace}
           >
-            <Text style={styles.letterText}>{'backspace'.toUpperCase()}</Text>
+            <Text style={letterButtonTextStyles}>
+              {'backspace'.toUpperCase()}
+            </Text>
           </TVTouchableFeedback>
           <TVTouchableFeedback
-            style={styles.letterButton}
-            focusStyles={styles.letterButtonFocus}
+            style={letterButtonStyles}
+            focusStyles={letterButtonFocusStyles}
             activeOpacity={1}
             onPress={clear}
           >
-            <Text style={styles.letterText}>{'clear'.toUpperCase()}</Text>
+            <Text style={letterButtonTextStyles}>{'clear'.toUpperCase()}</Text>
           </TVTouchableFeedback>
         </View>
         {showSymbols && (
-          <View style={styles.letterContainer}>
+          <View style={letterContainerStyles}>
             {Language.symbols.map(letter => {
               return (
                 <TVTouchableFeedback
                   testID={`symbol-${letter}`}
-                  style={styles.letterButton}
-                  focusStyles={styles.letterButtonFocus}
+                  style={letterButtonStyles}
+                  focusStyles={letterButtonFocusStyles}
                   activeOpacity={1}
                   key={letter}
                   onPress={addLetter(letter)}
                 >
-                  <Text style={styles.letterText}>{letter.toUpperCase()}</Text>
+                  <Text style={letterButtonTextStyles}>
+                    {letter.toUpperCase()}
+                  </Text>
                 </TVTouchableFeedback>
               );
             })}
