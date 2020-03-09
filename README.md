@@ -2,6 +2,8 @@
 
 Inline keyboard for React Native TV Applications
 
+![Inline Keyboard Screenshot](./images/screenshot.png)
+
 ## Installation
 
 ```sh
