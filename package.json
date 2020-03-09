@@ -1,6 +1,6 @@
 {
   "name": "react-native-inline-keyboard",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Inline keyboard for React Native TV Applications",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -89,7 +89,10 @@
       ]
     }
   },
-  "eslintIgnore": ["node_modules/", "lib/"],
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
   "prettier": {
     "singleQuote": true,
     "tabWidth": 2,
@@ -113,6 +116,10 @@
   "@react-native-community/bob": {
     "source": "src",
     "output": "lib",
-    "targets": ["commonjs", "module", "typescript"]
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
   }
 }
