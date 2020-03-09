@@ -68,12 +68,14 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = ({ onChange, value }) => {
             focusStyles={styles.letterButtonFocus}
             activeOpacity={1}
             onPress={toggleShowSymbols}
+            testID={'symbols-button'}
           >
             <Text style={styles.letterText}>123</Text>
           </TVTouchableFeedback>
           {Language.letters.map(letter => {
             return (
               <TVTouchableFeedback
+                testID={`letter-${letter}`}
                 style={styles.letterButton}
                 focusStyles={styles.letterButtonFocus}
                 activeOpacity={1}
@@ -85,6 +87,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = ({ onChange, value }) => {
             );
           })}
           <TVTouchableFeedback
+            testID={'space-button'}
             style={styles.letterButton}
             focusStyles={styles.letterButtonFocus}
             activeOpacity={1}
@@ -93,6 +96,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = ({ onChange, value }) => {
             <Text style={styles.letterText}>{'space'.toUpperCase()}</Text>
           </TVTouchableFeedback>
           <TVTouchableFeedback
+            testID={'delete-button'}
             style={styles.letterButton}
             focusStyles={styles.letterButtonFocus}
             activeOpacity={1}
@@ -114,6 +118,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = ({ onChange, value }) => {
             {Language.symbols.map(letter => {
               return (
                 <TVTouchableFeedback
+                  testID={`symbol-${letter}`}
                   style={styles.letterButton}
                   focusStyles={styles.letterButtonFocus}
                   activeOpacity={1}
