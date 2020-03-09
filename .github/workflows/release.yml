@@ -34,9 +34,6 @@ jobs:
       - name: Build
         run: yarn prepare
 
-      - name: Version
-        run: npm version ${GITHUB_REF/refs\/tags\//}
-
       - name: Publish
         run: npm publish
         env:
