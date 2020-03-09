@@ -7,8 +7,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import TVTouchableFeedback from './TVTouchableFeedback';
 import Language from './languages/en';
+import LetterButton from './LetterButton';
 
 const styles = StyleSheet.create({
   input: {
@@ -62,6 +62,12 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
     letterButtonTextStyles = styles.letterText,
   } = props;
 
+  const letterButtonProps = {
+    letterButtonStyles,
+    letterButtonFocusStyles,
+    letterButtonTextStyles,
+  };
+
   const toggleShowSymbols = () => {
     setShowSymbols(!showSymbols);
   };
@@ -87,76 +93,55 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
       )}
       <View>
         <View style={letterContainerStyles}>
-          <TVTouchableFeedback
-            style={letterButtonStyles}
-            focusStyles={letterButtonFocusStyles}
-            activeOpacity={1}
+          <LetterButton
+            {...letterButtonProps}
             onPress={toggleShowSymbols}
             testID={'symbols-button'}
           >
-            <Text style={letterButtonTextStyles}>123</Text>
-          </TVTouchableFeedback>
+            123
+          </LetterButton>
           {Language.letters.map(letter => {
             return (
-              <TVTouchableFeedback
+              <LetterButton
+                {...letterButtonProps}
                 testID={`letter-${letter}`}
-                style={letterButtonStyles}
-                focusStyles={letterButtonFocusStyles}
-                activeOpacity={1}
                 key={letter}
                 onPress={addLetter(letter)}
               >
-                <Text style={letterButtonTextStyles}>
-                  {letter.toUpperCase()}
-                </Text>
-              </TVTouchableFeedback>
+                {letter.toUpperCase()}
+              </LetterButton>
             );
           })}
-          <TVTouchableFeedback
+          <LetterButton
+            {...letterButtonProps}
             testID={'space-button'}
-            style={letterButtonStyles}
-            focusStyles={letterButtonFocusStyles}
-            activeOpacity={1}
             onPress={addLetter(' ')}
           >
-            <Text style={letterButtonTextStyles}>{'space'.toUpperCase()}</Text>
-          </TVTouchableFeedback>
-          <TVTouchableFeedback
+            {'space'.toUpperCase()}
+          </LetterButton>
+          <LetterButton
+            {...letterButtonProps}
             testID={'delete-button'}
-            style={letterButtonStyles}
-            focusStyles={letterButtonFocusStyles}
-            activeOpacity={1}
             onPress={backspace}
           >
-            <Text style={letterButtonTextStyles}>
-              {'backspace'.toUpperCase()}
-            </Text>
-          </TVTouchableFeedback>
-          <TVTouchableFeedback
-            style={letterButtonStyles}
-            focusStyles={letterButtonFocusStyles}
-            activeOpacity={1}
-            onPress={clear}
-          >
-            <Text style={letterButtonTextStyles}>{'clear'.toUpperCase()}</Text>
-          </TVTouchableFeedback>
+            {'backspace'.toUpperCase()}
+          </LetterButton>
+          <LetterButton {...letterButtonProps} onPress={clear}>
+            {'clear'.toUpperCase()}
+          </LetterButton>
         </View>
         {showSymbols && (
           <View style={letterContainerStyles}>
             {Language.symbols.map(letter => {
               return (
-                <TVTouchableFeedback
+                <LetterButton
+                  {...letterButtonProps}
                   testID={`symbol-${letter}`}
-                  style={letterButtonStyles}
-                  focusStyles={letterButtonFocusStyles}
-                  activeOpacity={1}
                   key={letter}
                   onPress={addLetter(letter)}
                 >
-                  <Text style={letterButtonTextStyles}>
-                    {letter.toUpperCase()}
-                  </Text>
-                </TVTouchableFeedback>
+                  {letter.toUpperCase()}
+                </LetterButton>
               );
             })}
           </View>
