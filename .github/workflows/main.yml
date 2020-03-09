@@ -31,3 +31,6 @@ jobs:
 
       - name: Build
         run: yarn prepare
+
+      - name: Publish
+        run: yarn publish

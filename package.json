@@ -1,6 +1,6 @@
 {
   "name": "react-native-inline-keyboard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Inline keyboard for React Native TV Applications",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -103,9 +103,6 @@
     },
     "npm": {
       "publish": true
-    },
-    "github": {
-      "release": true
     },
     "plugins": {
       "@release-it/conventional-changelog": {
