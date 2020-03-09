@@ -1,4 +1,7 @@
-# react-native-inline-keyboard
+# React Native Inline Keyboard
+![Lint & Test](https://github.com/ajoelp/react-native-inline-keyboard/workflows/Lint%20&%20Test/badge.svg?branch=master)
+[![npm version](https://badge.fury.io/js/react-native-inline-keyboard.svg)](https://badge.fury.io/js/react-native-inline-keyboard)
+
 
 Inline keyboard for React Native TV Applications
 
