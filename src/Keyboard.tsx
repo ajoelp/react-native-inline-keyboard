@@ -7,8 +7,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import Language from './languages/en';
 import LetterButton from './LetterButton';
+import lang, { LanguagePack } from './languages/index';
 
 const styles = StyleSheet.create({
   input: {
@@ -47,6 +47,7 @@ interface InlineKeyboardProps {
   letterButtonStyles?: StyleProp<ViewStyle>;
   letterButtonFocusStyles?: StyleProp<ViewStyle>;
   letterButtonTextStyles?: StyleProp<TextStyle>;
+  language?: string | LanguagePack;
 }
 
 const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
@@ -60,7 +61,11 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
     letterButtonStyles = styles.letterButton,
     letterButtonFocusStyles = styles.letterButtonFocus,
     letterButtonTextStyles = styles.letterText,
+    language = 'EN',
   } = props;
+
+  const languagePack =
+    typeof language === 'string' ? lang(language as string) : language;
 
   const letterButtonProps = {
     letterButtonStyles,
@@ -100,7 +105,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
           >
             123
           </LetterButton>
-          {Language.letters.map(letter => {
+          {languagePack.letters.map(letter => {
             return (
               <LetterButton
                 {...letterButtonProps}
@@ -132,7 +137,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
         </View>
         {showSymbols && (
           <View style={letterContainerStyles}>
-            {Language.symbols.map(letter => {
+            {languagePack.symbols.map(letter => {
               return (
                 <LetterButton
                   {...letterButtonProps}
