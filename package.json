@@ -21,6 +21,11 @@
     "bootstrap": "yarn example && yarn && yarn pods"
   },
   "keywords": [
+    "inline",
+    "keyboard",
+    "TV",
+    "Android-TV",
+    "tvOS",
     "react-native",
     "ios",
     "android"

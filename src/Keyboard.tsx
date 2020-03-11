@@ -7,8 +7,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import Language from './languages/en';
 import LetterButton from './LetterButton';
+import lang, { LanguagePack } from './languages/index';
 
 const styles = StyleSheet.create({
   input: {
@@ -41,12 +41,15 @@ const styles = StyleSheet.create({
 
 interface InlineKeyboardProps {
   value: string;
+
   onChange(text: string): any;
+
   showInput?: boolean;
   letterContainerStyles?: StyleProp<ViewStyle>;
   letterButtonStyles?: StyleProp<ViewStyle>;
   letterButtonFocusStyles?: StyleProp<ViewStyle>;
   letterButtonTextStyles?: StyleProp<TextStyle>;
+  language?: string | LanguagePack;
 }
 
 const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
@@ -60,7 +63,11 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
     letterButtonStyles = styles.letterButton,
     letterButtonFocusStyles = styles.letterButtonFocus,
     letterButtonTextStyles = styles.letterText,
+    language = 'EN',
   } = props;
+
+  const languagePack =
+    typeof language === 'string' ? lang(language as string) : language;
 
   const letterButtonProps = {
     letterButtonStyles,
@@ -93,14 +100,16 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
       )}
       <View>
         <View style={letterContainerStyles}>
-          <LetterButton
-            {...letterButtonProps}
-            onPress={toggleShowSymbols}
-            testID={'symbols-button'}
-          >
-            123
-          </LetterButton>
-          {Language.letters.map(letter => {
+          {languagePack.symbols && (
+            <LetterButton
+              {...letterButtonProps}
+              onPress={toggleShowSymbols}
+              testID={'symbols-button'}
+            >
+              123
+            </LetterButton>
+          )}
+          {languagePack.letters.map(letter => {
             return (
               <LetterButton
                 {...letterButtonProps}
@@ -130,9 +139,9 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
             {'clear'.toUpperCase()}
           </LetterButton>
         </View>
-        {showSymbols && (
-          <View style={letterContainerStyles}>
-            {Language.symbols.map(letter => {
+        {showSymbols && languagePack.symbols && (
+          <View style={letterContainerStyles} testID={'symbols-container'}>
+            {languagePack.symbols.map(letter => {
               return (
                 <LetterButton
                   {...letterButtonProps}
