@@ -41,7 +41,9 @@ const styles = StyleSheet.create({
 
 interface InlineKeyboardProps {
   value: string;
+
   onChange(text: string): any;
+
   showInput?: boolean;
   letterContainerStyles?: StyleProp<ViewStyle>;
   letterButtonStyles?: StyleProp<ViewStyle>;
@@ -98,13 +100,15 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
       )}
       <View>
         <View style={letterContainerStyles}>
-          <LetterButton
-            {...letterButtonProps}
-            onPress={toggleShowSymbols}
-            testID={'symbols-button'}
-          >
-            123
-          </LetterButton>
+          {languagePack.symbols && (
+            <LetterButton
+              {...letterButtonProps}
+              onPress={toggleShowSymbols}
+              testID={'symbols-button'}
+            >
+              123
+            </LetterButton>
+          )}
           {languagePack.letters.map(letter => {
             return (
               <LetterButton
@@ -135,8 +139,8 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
             {'clear'.toUpperCase()}
           </LetterButton>
         </View>
-        {showSymbols && (
-          <View style={letterContainerStyles}>
+        {showSymbols && languagePack.symbols && (
+          <View style={letterContainerStyles} testID={'symbols-container'}>
             {languagePack.symbols.map(letter => {
               return (
                 <LetterButton

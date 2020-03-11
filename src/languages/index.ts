@@ -2,7 +2,7 @@ import EN from './en';
 
 export interface LanguagePack {
   letters: string[];
-  symbols: string[];
+  symbols?: string[];
 }
 
 const languages: { [name: string]: LanguagePack } = {

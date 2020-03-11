@@ -93,9 +93,23 @@ describe('Keyboard', function() {
         eventKeyAction: true,
       });
 
-      for (let symbol of language.symbols) {
+      for (let symbol of language.symbols!) {
         expect(wrapper.getByTestId(`symbol-${symbol}`)).toBeDefined();
       }
+    });
+  });
+
+  describe('Language pack with no symbols', () => {
+    const language: LanguagePack = {
+      letters: ['z', 'f', 'd'],
+    };
+
+    it('will not show symbols', async () => {
+      const wrapper = render(
+        <Keyboard value={''} onChange={() => {}} language={language} />
+      );
+
+      expect(wrapper.queryByTestId('symbols-button')).toBeFalsy();
     });
   });
 });
