@@ -25,15 +25,16 @@ import InlineKeyboard from "react-native-inline-keyboard";
 
 ### Props
 
-| Prop | Type |
-|------|------|
+| Prop | Type | default |
+|------|------|---------|
 |value | `string` |
-|onChange | `function (value: string`)|
-|showInput | `boolean` |
+|onChange | ```ts function (value: string)```|
+|showInput | `boolean` | `true` |
 |letterContainerStyles | `StyleProp<ViewStyle>` |
 |letterButtonStyles | `StyleProp<ViewStyle>` |
 |letterButtonFocusStyles | `StyleProp<ViewStyle>` |
 |letterButtonTextStyles | `StyleProp<TextStyle>` |
+|language | `string/LanguagePack` | `EN` |
 
 ## License
 
