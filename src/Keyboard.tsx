@@ -164,7 +164,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
         </View>
         {showSymbols && languagePack.symbols && (
           <View style={letterContainerStyles} testID={'symbols-container'}>
-            {languagePack.symbols.map(letter => {
+            {languagePack.symbols.map((letter) => {
               return (
                 <LetterButton
                   {...letterButtonProps}
