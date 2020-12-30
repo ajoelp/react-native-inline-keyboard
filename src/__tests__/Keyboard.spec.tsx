@@ -4,7 +4,7 @@ import Keyboard from '../Keyboard';
 import Language from '../languages/en';
 import { LanguagePack } from '../languages';
 
-describe('Keyboard', function() {
+describe('Keyboard', function () {
   it('will render the component', () => {
     const wrapper = render(<Keyboard value={''} onChange={() => {}} />);
     expect(wrapper).toBeDefined();
@@ -28,6 +28,19 @@ describe('Keyboard', function() {
 
     for (let symbol of Language.symbols) {
       expect(wrapper.getByTestId(`symbol-${symbol}`)).toBeDefined();
+    }
+  });
+
+  it('will show uppercase letters', async () => {
+    const wrapper = render(<Keyboard value={''} onChange={() => {}} />);
+
+    fireEvent.press(wrapper.getByTestId('text-transform-button'), {
+      eventType: 'select',
+      eventKeyAction: true,
+    });
+
+    for (let letter of Language.symbols) {
+      expect(wrapper.getByTestId(`letter-${letter}`)).toBeDefined();
     }
   });
 

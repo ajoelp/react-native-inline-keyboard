@@ -52,8 +52,13 @@ interface InlineKeyboardProps {
   language?: string | LanguagePack;
 }
 
-const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
+type TextTransform = 'uppercase' | 'uppercase';
+
+const InlineKeyboard: React.FC<InlineKeyboardProps> = (props) => {
   const [showSymbols, setShowSymbols] = React.useState(false);
+  const [textTransform, setTextTransform] = React.useState<TextTransform>(
+    'uppercase'
+  );
 
   const {
     onChange,
@@ -77,6 +82,13 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
 
   const toggleShowSymbols = () => {
     setShowSymbols(!showSymbols);
+  };
+
+  const getValueTextTransform = (): TextTransform =>
+    textTransform === 'lowercase' ? 'uppercase' : 'lowercase';
+
+  const toggleTextTransform = () => {
+    setTextTransform(getValueTextTransform());
   };
 
   const addLetter = (letter: string) => () => {
@@ -109,10 +121,21 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
               123
             </LetterButton>
           )}
-          {languagePack.letters.map(letter => {
+          <LetterButton
+            {...letterButtonProps}
+            onPress={toggleTextTransform}
+            testID={'text-transform-button'}
+          >
+            {getValueTextTransform().toUpperCase()}
+          </LetterButton>
+          {languagePack.letters.map((letter) => {
             return (
               <LetterButton
                 {...letterButtonProps}
+                letterButtonTextStyles={[
+                  letterButtonProps.letterButtonTextStyles,
+                  { textTransform },
+                ]}
                 testID={`letter-${letter}`}
                 key={letter}
                 onPress={addLetter(letter)}
@@ -141,7 +164,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
         </View>
         {showSymbols && languagePack.symbols && (
           <View style={letterContainerStyles} testID={'symbols-container'}>
-            {languagePack.symbols.map(letter => {
+            {languagePack.symbols.map((letter) => {
               return (
                 <LetterButton
                   {...letterButtonProps}
