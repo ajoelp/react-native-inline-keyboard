@@ -138,7 +138,11 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
                 ]}
                 testID={`letter-${letter}`}
                 key={letter}
-                onPress={addLetter(letter)}
+                onPress={addLetter(
+                  textTransform === 'uppercase'
+                    ? letter.toUpperCase()
+                    : letter.toLowerCase()
+                )}
               >
                 {letter.toUpperCase()}
               </LetterButton>
