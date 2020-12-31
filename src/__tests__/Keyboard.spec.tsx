@@ -4,7 +4,7 @@ import Keyboard from '../Keyboard';
 import Language from '../languages/en';
 import { LanguagePack } from '../languages';
 
-describe('Keyboard', function () {
+describe('Keyboard', function() {
   it('will render the component', () => {
     const wrapper = render(<Keyboard value={''} onChange={() => {}} />);
     expect(wrapper).toBeDefined();

@@ -52,9 +52,9 @@ interface InlineKeyboardProps {
   language?: string | LanguagePack;
 }
 
-type TextTransform = 'uppercase' | 'uppercase';
+type TextTransform = 'uppercase' | 'lowercase';
 
-const InlineKeyboard: React.FC<InlineKeyboardProps> = (props) => {
+const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
   const [showSymbols, setShowSymbols] = React.useState(false);
   const [textTransform, setTextTransform] = React.useState<TextTransform>(
     'uppercase'
@@ -128,7 +128,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = (props) => {
           >
             {getValueTextTransform().toUpperCase()}
           </LetterButton>
-          {languagePack.letters.map((letter) => {
+          {languagePack.letters.map(letter => {
             return (
               <LetterButton
                 {...letterButtonProps}
@@ -164,7 +164,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = (props) => {
         </View>
         {showSymbols && languagePack.symbols && (
           <View style={letterContainerStyles} testID={'symbols-container'}>
-            {languagePack.symbols.map((letter) => {
+            {languagePack.symbols.map(letter => {
               return (
                 <LetterButton
                   {...letterButtonProps}
