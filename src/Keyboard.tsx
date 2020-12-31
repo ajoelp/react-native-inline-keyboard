@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
 import LetterButton from './LetterButton';
 import lang, { LanguagePack } from './languages/index';
 
@@ -54,11 +47,9 @@ interface InlineKeyboardProps {
 
 type TextTransform = 'uppercase' | 'lowercase';
 
-const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
+const InlineKeyboard: React.FC<InlineKeyboardProps> = (props) => {
   const [showSymbols, setShowSymbols] = React.useState(false);
-  const [textTransform, setTextTransform] = React.useState<TextTransform>(
-    'uppercase'
-  );
+  const [textTransform, setTextTransform] = React.useState<TextTransform>('uppercase');
 
   const {
     onChange,
@@ -71,8 +62,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
     language = 'EN',
   } = props;
 
-  const languagePack =
-    typeof language === 'string' ? lang(language as string) : language;
+  const languagePack = typeof language === 'string' ? lang(language as string) : language;
 
   const letterButtonProps = {
     letterButtonStyles,
@@ -84,8 +74,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
     setShowSymbols(!showSymbols);
   };
 
-  const getValueTextTransform = (): TextTransform =>
-    textTransform === 'lowercase' ? 'uppercase' : 'lowercase';
+  const getValueTextTransform = (): TextTransform => (textTransform === 'lowercase' ? 'uppercase' : 'lowercase');
 
   const toggleTextTransform = () => {
     setTextTransform(getValueTextTransform());
@@ -113,53 +102,30 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
       <View>
         <View style={letterContainerStyles}>
           {languagePack.symbols && (
-            <LetterButton
-              {...letterButtonProps}
-              onPress={toggleShowSymbols}
-              testID={'symbols-button'}
-            >
+            <LetterButton {...letterButtonProps} onPress={toggleShowSymbols} testID={'symbols-button'}>
               123
             </LetterButton>
           )}
-          <LetterButton
-            {...letterButtonProps}
-            onPress={toggleTextTransform}
-            testID={'text-transform-button'}
-          >
+          <LetterButton {...letterButtonProps} onPress={toggleTextTransform} testID={'text-transform-button'}>
             {getValueTextTransform().toUpperCase()}
           </LetterButton>
-          {languagePack.letters.map(letter => {
+          {languagePack.letters.map((letter) => {
             return (
               <LetterButton
                 {...letterButtonProps}
-                letterButtonTextStyles={[
-                  letterButtonProps.letterButtonTextStyles,
-                  { textTransform },
-                ]}
-                testID={`letter-${letter}`}
+                letterButtonTextStyles={[letterButtonProps.letterButtonTextStyles, { textTransform }]}
+                testID={`letter-${letter}-${textTransform}`}
                 key={letter}
-                onPress={addLetter(
-                  textTransform === 'uppercase'
-                    ? letter.toUpperCase()
-                    : letter.toLowerCase()
-                )}
+                onPress={addLetter(textTransform === 'uppercase' ? letter.toUpperCase() : letter.toLowerCase())}
               >
                 {letter.toUpperCase()}
               </LetterButton>
             );
           })}
-          <LetterButton
-            {...letterButtonProps}
-            testID={'space-button'}
-            onPress={addLetter(' ')}
-          >
+          <LetterButton {...letterButtonProps} testID={'space-button'} onPress={addLetter(' ')}>
             {'space'.toUpperCase()}
           </LetterButton>
-          <LetterButton
-            {...letterButtonProps}
-            testID={'delete-button'}
-            onPress={backspace}
-          >
+          <LetterButton {...letterButtonProps} testID={'delete-button'} onPress={backspace}>
             {'backspace'.toUpperCase()}
           </LetterButton>
           <LetterButton {...letterButtonProps} onPress={clear}>
@@ -168,7 +134,7 @@ const InlineKeyboard: React.FC<InlineKeyboardProps> = props => {
         </View>
         {showSymbols && languagePack.symbols && (
           <View style={letterContainerStyles} testID={'symbols-container'}>
-            {languagePack.symbols.map(letter => {
+            {languagePack.symbols.map((letter) => {
               return (
                 <LetterButton
                   {...letterButtonProps}

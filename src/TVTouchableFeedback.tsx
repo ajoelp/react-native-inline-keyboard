@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StyleProp,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native';
 
 interface TVTouchableFeedbackProps extends TouchableOpacityProps {
   focusStyles?: StyleProp<ViewStyle>;
@@ -14,10 +9,7 @@ interface TVTouchableFeedbackState {
   focused: boolean;
 }
 
-export default class TVTouchableFeedback extends React.Component<
-  TVTouchableFeedbackProps,
-  TVTouchableFeedbackState
-> {
+export default class TVTouchableFeedback extends React.Component<TVTouchableFeedbackProps, TVTouchableFeedbackState> {
   state = {
     focused: false,
   };
@@ -31,11 +23,7 @@ export default class TVTouchableFeedback extends React.Component<
   };
 
   onPress = (event: any) => {
-    if (
-      event.eventType === 'select' &&
-      event.eventKeyAction &&
-      this.props.onPress
-    ) {
+    if (event.eventType === 'select' && event.eventKeyAction && this.props.onPress) {
       this.props.onPress(event);
     }
   };

@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import TVTouchableFeedback from '../TVTouchableFeedback';
 
-describe('TVTouchableFeedback', function() {
+describe('TVTouchableFeedback', function () {
   it('will render the component', () => {
     const wrapper = render(<TVTouchableFeedback />);
     expect(wrapper).toBeDefined();
@@ -14,7 +14,7 @@ describe('TVTouchableFeedback', function() {
     const wrapper = render(
       <TVTouchableFeedback>
         <Text>{text}</Text>
-      </TVTouchableFeedback>
+      </TVTouchableFeedback>,
     );
     expect(wrapper.findByText(text)).toBeDefined();
   });
@@ -22,9 +22,7 @@ describe('TVTouchableFeedback', function() {
   it('will will emit onPress event', () => {
     const press = jest.fn();
 
-    const wrapper = render(
-      <TVTouchableFeedback testID="touchable" onPress={press} />
-    );
+    const wrapper = render(<TVTouchableFeedback testID="touchable" onPress={press} />);
     fireEvent.press(wrapper.getByTestId('touchable'), {
       eventType: 'select',
       eventKeyAction: true,

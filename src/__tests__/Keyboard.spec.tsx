@@ -4,7 +4,7 @@ import Keyboard from '../Keyboard';
 import Language from '../languages/en';
 import { LanguagePack } from '../languages';
 
-describe('Keyboard', function() {
+describe('Keyboard', function () {
   it('will render the component', () => {
     const wrapper = render(<Keyboard value={''} onChange={() => {}} />);
     expect(wrapper).toBeDefined();
@@ -14,7 +14,7 @@ describe('Keyboard', function() {
     const wrapper = render(<Keyboard value={''} onChange={() => {}} />);
 
     for (let letter of Language.letters) {
-      expect(wrapper.getByTestId(`letter-${letter}`)).toBeDefined();
+      expect(wrapper.getByTestId(`letter-${letter}-uppercase`)).toBeDefined();
     }
   });
 
@@ -31,16 +31,20 @@ describe('Keyboard', function() {
     }
   });
 
-  it('will show uppercase letters', async () => {
+  it('will show lowercase letters when the button is cliecked', async () => {
     const wrapper = render(<Keyboard value={''} onChange={() => {}} />);
+
+    for (let letter of Language.letters) {
+      expect(wrapper.getByTestId(`letter-${letter}-uppercase`)).toBeDefined();
+    }
 
     fireEvent.press(wrapper.getByTestId('text-transform-button'), {
       eventType: 'select',
       eventKeyAction: true,
     });
 
-    for (let letter of Language.symbols) {
-      expect(wrapper.getByTestId(`letter-${letter}`)).toBeDefined();
+    for (let letter of Language.letters) {
+      expect(wrapper.getByTestId(`letter-${letter}-lowercase`)).toBeDefined();
     }
   });
 
@@ -48,12 +52,12 @@ describe('Keyboard', function() {
     const press = jest.fn();
     const wrapper = render(<Keyboard value={'a'} onChange={press} />);
 
-    fireEvent.press(wrapper.getByTestId(`letter-a`), {
+    fireEvent.press(wrapper.getByTestId(`letter-a-uppercase`), {
       eventType: 'select',
       eventKeyAction: true,
     });
 
-    expect(press).toHaveBeenCalledWith('aa');
+    expect(press).toHaveBeenCalledWith('aA');
   });
 
   it('will remove letter from value', () => {
@@ -87,19 +91,15 @@ describe('Keyboard', function() {
     };
 
     it('will show letters', async () => {
-      const wrapper = render(
-        <Keyboard value={''} onChange={() => {}} language={language} />
-      );
+      const wrapper = render(<Keyboard value={''} onChange={() => {}} language={language} />);
 
       for (let letter of language.letters) {
-        expect(wrapper.getByTestId(`letter-${letter}`)).toBeDefined();
+        expect(wrapper.getByTestId(`letter-${letter}-uppercase`)).toBeDefined();
       }
     });
 
     it('will show symbols', async () => {
-      const wrapper = render(
-        <Keyboard value={''} onChange={() => {}} language={language} />
-      );
+      const wrapper = render(<Keyboard value={''} onChange={() => {}} language={language} />);
 
       fireEvent.press(wrapper.getByTestId('symbols-button'), {
         eventType: 'select',
@@ -118,9 +118,7 @@ describe('Keyboard', function() {
     };
 
     it('will not show symbols', async () => {
-      const wrapper = render(
-        <Keyboard value={''} onChange={() => {}} language={language} />
-      );
+      const wrapper = render(<Keyboard value={''} onChange={() => {}} language={language} />);
 
       expect(wrapper.queryByTestId('symbols-button')).toBeFalsy();
     });

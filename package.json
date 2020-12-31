@@ -1,21 +1,24 @@
 {
   "name": "react-native-inline-keyboard",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Inline keyboard for React Native TV Applications",
-  "main": "lib/commonjs/index.js",
-  "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
-  "react-native": "src/index.tsx",
+  "source": "src/index.tsx",
+  "typings": "dist/index.d.ts",
+  "main": "dist/react-native-inline-keyboard.js",
+  "module": "dist/react-native-inline-keyboard.module.js",
+  "unpkg": "dist/react-native-inline-keyboard.umd.js",
   "files": [
-    "src",
-    "lib"
+    "dist",
+    "src"
   ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "test": "jest",
-    "typescript": "tsc --noEmit",
-    "lint": "eslint --ext .js,.ts,.tsx .",
-    "prepare": "bob build",
-    "release": "release-it",
+    "lint": "eslint '{src,stories}/**/*.{js,ts,tsx}'",
+    "lint:fix": "eslint '{src,stories}**/*.{js,ts,tsx}' --quiet --fix",
+    "build": "microbundle --sourcemap false --jsx React.createElement",
     "example": "yarn --cwd example",
     "pods": "cd example/ios && node -e \"process.exit(require('os').platform() === 'darwin')\" || pod install",
     "bootstrap": "yarn example && yarn && yarn pods"
@@ -37,85 +40,37 @@
     "url": "https://github.com/ajoelp/react-native-inline-keyboard/issues"
   },
   "homepage": "https://github.com/ajoelp/react-native-inline-keyboard#readme",
-  "devDependencies": {
-    "@commitlint/config-conventional": "^8.3.4",
-    "@react-native-community/bob": "^0.10.0",
-    "@react-native-community/eslint-config": "^0.0.7",
-    "@release-it/conventional-changelog": "^1.1.0",
-    "@testing-library/react-native": "^5.0.3",
-    "@types/jest": "^25.1.2",
-    "@types/react": "^16.9.19",
-    "@types/react-native": "0.61.10",
-    "commitlint": "^8.3.4",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^4.0.1",
-    "jest": "^25.1.0",
-    "prettier": "^1.19.1",
-    "react": "~16.9.0",
-    "react-native": "~0.61.5",
-    "react-test-renderer": "^16.13.0",
-    "release-it": "^12.6.3",
-    "typescript": "^3.7.5"
-  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn typescript"
-    }
-  },
-  "eslintConfig": {
-    "extends": [
-      "@react-native-community",
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "es5",
-          "useTabs": false
-        }
-      ]
-    }
-  },
-  "eslintIgnore": [
-    "node_modules/",
-    "lib/"
-  ],
-  "prettier": {
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5",
-    "useTabs": false
-  },
-  "release-it": {
-    "git": {
-      "commitMessage": "chore: release %s",
-      "tagName": "v%s"
-    },
-    "npm": {
-      "publish": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
-    }
-  },
-  "@react-native-community/bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      "typescript"
-    ]
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/react-native": "^5.0.3",
+    "@types/jest": "^26.0.19",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-native": "0.61.10",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-react-app": "^6.2.2",
+    "jest": "^26.6.3",
+    "jest-circus": "^26.6.3",
+    "microbundle": "^0.13.0",
+    "prettier": "^2.2.1",
+    "react": "^16.14.0",
+    "react-app-polyfill": "^2.0.0",
+    "react-dom": "^17.0.1",
+    "react-native": "~0.61.5",
+    "react-test-renderer": "^17.0.1",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3"
   }
 }

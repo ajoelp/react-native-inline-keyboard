@@ -1,10 +1,4 @@
-import {
-  GestureResponderEvent,
-  StyleProp,
-  Text,
-  TextStyle,
-  ViewStyle,
-} from 'react-native';
+import { GestureResponderEvent, StyleProp, Text, TextStyle, ViewStyle } from 'react-native';
 import React from 'react';
 import TVTouchableFeedback from './TVTouchableFeedback';
 
